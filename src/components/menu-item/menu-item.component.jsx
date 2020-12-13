@@ -1,10 +1,16 @@
 import React from 'react';
-import * as cx from 'classnames';
-import './_menu.item.styles.scss';
+import { withRouter } from 'react-router-dom';
 
-const MenuItem = ({ title, imageUrl, size }) => {
+import * as cx from 'classnames';
+import './_menu-item.styles.scss';
+
+const MenuItem = ({ title, imageUrl, size, history, linkUrl, match }) => {
   return (
-    <div className={cx('menu-item', { large: !!size })}>
+    <div
+      className={cx('menu-item', { large: !!size })}
+      onClick={() => history.push(`${match.url}${linkUrl}`)}
+      role="presentation"
+    >
       <div
         className="background-image"
         style={{
@@ -19,4 +25,4 @@ const MenuItem = ({ title, imageUrl, size }) => {
   );
 };
 
-export default MenuItem;
+export default withRouter(MenuItem);
