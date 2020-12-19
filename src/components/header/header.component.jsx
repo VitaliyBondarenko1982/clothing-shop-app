@@ -6,10 +6,12 @@ import { ReactComponent as Logo } from '../../assets/crown.svg';
 import { auth } from '../../firebase/firebase.utils';
 import CartIcon from '../cart-icon/cart-icon.component';
 import CartDropdown from '../cart-dropdown/cart-dropdown.component';
+import { selectHidden } from '../../redux/cart/cart.selectors';
+import { selectCurrentUser } from '../../redux/user/user.selectors';
 
 const Header = () => {
-  const { currentUser } = useSelector((state) => state.user);
-  const { hidden } = useSelector((state) => state.cart);
+  const currentUser = useSelector(selectCurrentUser);
+  const hidden = useSelector(selectHidden);
 
   return (
     <div className="header">
