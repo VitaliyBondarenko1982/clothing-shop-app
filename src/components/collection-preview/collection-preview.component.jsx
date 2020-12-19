@@ -7,13 +7,7 @@ const CollectionPreview = ({ title, items }) => (
     <h1 className="title">{title}</h1>
     <div className="preview">
       {items.slice(0, 4).map((item) => (
-        <CollectionItem
-          key={item.id}
-          id={item.id}
-          price={item.price}
-          name={item.name}
-          imageUrl={item.imageUrl}
-        />
+        <CollectionItem key={item.id} item={item} />
       ))}
     </div>
   </div>
