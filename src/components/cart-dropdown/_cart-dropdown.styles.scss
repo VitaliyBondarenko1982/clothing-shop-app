@@ -19,7 +19,6 @@
     scrollbar-color: rgba(80, 80, 80, 0) rgba(0, 0, 0, 0);
     scrollbar-width: thin;
     overflow: auto;
-    color: rgba(80, 80, 80, 0);
     transition: all 0.3s;
 
     &::-webkit-scrollbar {
@@ -42,11 +41,6 @@
     &::-webkit-scrollbar-corner {
       background-color: transparent;
     }
-  }
-
-  .cart-items:hover {
-    scrollbar-color: rgba(80, 80, 80, 0.4) rgba(0, 0, 0, 0);
-    color: rgba(80, 80, 80, 0.45);
   }
 
   button {
