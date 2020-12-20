@@ -1,13 +1,20 @@
-import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import CustomButton from '../custom-button/custom-button.component';
 import './_cart-dropdown.styles.scss';
 import CartItem from '../cart-item/cart-item.component';
 import { selectCartItems } from '../../redux/cart/cart.selectors';
+import { toggleCartHidden } from '../../redux/cart/cart.actions';
 
 const CartDropdown = ({ history }) => {
+  const dispatch = useDispatch();
   const cartItems = useSelector(selectCartItems);
+
+  const checkoutHandleClick = () => {
+    history.push('./checkout');
+    dispatch(toggleCartHidden());
+  };
 
   return (
     <div className="cart-dropdown">
@@ -20,7 +27,7 @@ const CartDropdown = ({ history }) => {
           <span className="empty-message">Your cart is empty</span>
         )}
       </div>
-      <CustomButton onClick={() => history.push('./checkout')}>
+      <CustomButton type="button" onClick={checkoutHandleClick}>
         Go to checkout
       </CustomButton>
     </div>

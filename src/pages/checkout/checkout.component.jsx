@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { selectCartItems } from '../../redux/cart/cart.selectors';
 import './_checkout.styles.scss';
+import CheckoutItem from '../../components/checkout-item/checkout-item.component';
 
 const CheckoutPage = () => {
   const cartItems = useSelector(selectCartItems);
@@ -32,7 +33,9 @@ const CheckoutPage = () => {
           <span>Remove</span>
         </div>
       </div>
-      {cartItems.map((cartItem) => cartItem.name)}
+      {cartItems.map((cartItem) => (
+        <CheckoutItem key={cartItem.id} cartItem={cartItem} />
+      ))}
       <div className="total">
         <span>Total: ${totalPrice}</span>
       </div>
