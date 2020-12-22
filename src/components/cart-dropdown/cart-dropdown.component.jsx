@@ -12,7 +12,7 @@ const CartDropdown = ({ history }) => {
   const cartItems = useSelector(selectCartItems);
 
   const checkoutHandleClick = () => {
-    history.push('./checkout');
+    history.push('/checkout');
     dispatch(toggleCartHidden());
   };
 
