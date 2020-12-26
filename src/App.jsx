@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import './App.css';
@@ -16,10 +16,10 @@ const App = () => {
   const dispatch = useDispatch();
   const currentUser = useSelector(selectCurrentUser);
 
-  let unsubscribeFromAuth = null;
+  const unsubscribeFromAuth = useRef(null);
 
   useEffect(() => {
-    unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+    unsubscribeFromAuth.current = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
 
@@ -37,9 +37,9 @@ const App = () => {
     });
 
     return () => {
-      unsubscribeFromAuth();
+      unsubscribeFromAuth.current();
     };
-  }, []);
+  }, [dispatch]);
 
   return (
     <div>
