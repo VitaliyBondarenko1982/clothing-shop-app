@@ -1,7 +1,6 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { ReactComponent as Logo } from '../../assets/crown.svg';
-import { auth } from '../../firebase/firebase.utils';
 import CartIcon from '../cart-icon/cart-icon.component';
 import CartDropdown from '../cart-dropdown/cart-dropdown.component';
 import { selectHidden } from '../../redux/cart/cart.selectors';
@@ -12,10 +11,16 @@ import {
   OptionLink,
   OptionsContainer,
 } from './header.styles';
+import { signOutStart } from '../../redux/user/user.actions';
 
 const Header = () => {
+  const dispatch = useDispatch();
   const currentUser = useSelector(selectCurrentUser);
   const hidden = useSelector(selectHidden);
+
+  const handleSignOut = () => {
+    dispatch(signOutStart());
+  };
 
   return (
     <HeaderContainer>
@@ -26,7 +31,7 @@ const Header = () => {
         <OptionLink to="/shop">Shop</OptionLink>
         <OptionLink to="/shop">Contact</OptionLink>
         {currentUser ? (
-          <OptionLink as="div" onClick={() => auth.signOut()}>
+          <OptionLink as="div" onClick={handleSignOut}>
             Sign out
           </OptionLink>
         ) : (
