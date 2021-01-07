@@ -1,9 +1,12 @@
 import React, { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCartItems } from '../../redux/cart/cart.selectors';
-import { ReactComponent as ShoppingIcon } from '../../assets/shopping-bag.svg';
-import './_cart-icon.styles.scss';
 import { toggleCartHidden } from '../../redux/cart/cart.actions';
+import {
+  CartContainer,
+  ShoppingIcon,
+  ItemCountContainer,
+} from './cart-icon.styles';
 
 const CartIcon = () => {
   const dispatch = useDispatch();
@@ -22,10 +25,10 @@ const CartIcon = () => {
   };
 
   return (
-    <div className="cart-icon" onClick={handleClick}>
-      <ShoppingIcon className="shopping-icon" />
-      <span className="item-count">{itemsCount}</span>
-    </div>
+    <CartContainer onClick={handleClick}>
+      <ShoppingIcon />
+      <ItemCountContainer>{itemsCount}</ItemCountContainer>
+    </CartContainer>
   );
 };
 

@@ -1,11 +1,17 @@
 import React from 'react';
-import './_checkout-item.styles.scss';
 import { useDispatch } from 'react-redux';
 import {
   addItem,
   clearItemFromCart,
   removeItem,
 } from '../../redux/cart/cart.actions';
+import {
+  CheckoutItemContainer,
+  ImageContainer,
+  TextContainer,
+  QuantityContainer,
+  RemoveButtonContainer,
+} from './checkout-item.styles';
 
 const CheckoutItem = ({ cartItem }) => {
   const dispatch = useDispatch();
@@ -24,12 +30,12 @@ const CheckoutItem = ({ cartItem }) => {
   };
 
   return (
-    <div className="checkout-item">
-      <div className="image-container">
+    <CheckoutItemContainer>
+      <ImageContainer>
         <img src={imageUrl} alt="item" />
-      </div>
-      <span className="name">{name}</span>
-      <span className="quantity">
+      </ImageContainer>
+      <TextContainer>{name}</TextContainer>
+      <QuantityContainer>
         <div className="arrow" onClick={removeQuantityHandleClick} aria-hidden>
           &#10094;
         </div>
@@ -37,12 +43,12 @@ const CheckoutItem = ({ cartItem }) => {
         <div className="arrow" onClick={addQuantityHandleClick} aria-hidden>
           &#10095;
         </div>
-      </span>
-      <span className="price">{price}</span>
-      <span className="remove-button" onClick={removeHandleClick}>
+      </QuantityContainer>
+      <TextContainer>{price}</TextContainer>
+      <RemoveButtonContainer onClick={removeHandleClick}>
         &#10005;
-      </span>
-    </div>
+      </RemoveButtonContainer>
+    </CheckoutItemContainer>
   );
 };
 
