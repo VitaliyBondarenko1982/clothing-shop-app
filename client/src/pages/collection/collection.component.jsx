@@ -7,20 +7,26 @@ import {
   CollectionTitle,
   CollectionItemsContainer,
 } from './collection.styles';
+import Spinner from '../../components/Spinner/spinner.componnent';
 
-const CollectionPage = ({ match }) => {
+const CollectionPage = ({ match, isLoading }) => {
   const collection = useSelector(selectCollection(match.params.collectionId));
-  const { title, items } = collection;
 
   return (
-    <CollectionPageContainer>
-      <CollectionTitle>{title}</CollectionTitle>
-      <CollectionItemsContainer>
-        {items.map((item) => (
-          <CollectionItem key={item.id} item={item} />
-        ))}
-      </CollectionItemsContainer>
-    </CollectionPageContainer>
+    <>
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <CollectionPageContainer>
+          <CollectionTitle>{collection.title}</CollectionTitle>
+          <CollectionItemsContainer>
+            {collection.items.map((item) => (
+              <CollectionItem key={item.id} item={item} />
+            ))}
+          </CollectionItemsContainer>
+        </CollectionPageContainer>
+      )}
+    </>
   );
 };
 
